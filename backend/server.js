@@ -15,7 +15,7 @@ dotenv.config();
 connectDB();
 
 const app = express();
-const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173";
+const FRONTEND_URL = process.env.FRONTEND_URL || "https://futureinterns-fs-02.vercel.app";
 
 app.use(helmet());
 app.use(cors({ origin: FRONTEND_URL }));
