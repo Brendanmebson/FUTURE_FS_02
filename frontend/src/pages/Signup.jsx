@@ -21,11 +21,14 @@ export default function Signup() {
 
   const handleSignup = async () => {
     try {
-      await axios.post("http://localhost:5000/api/users/register", {
-        name,
-        email,
-        password,
-      });
+      await axios.post(
+        `${import.meta.env.VITE_API_BASE_URL}/api/users/register`,
+        {
+          name,
+          email,
+          password,
+        }
+      );
       alert("Signup successful! Please log in.");
       navigate("/login");
     } catch (err) {
