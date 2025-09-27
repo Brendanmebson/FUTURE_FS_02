@@ -9,12 +9,12 @@ export default function Admin() {
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/products").then(res => setProducts(res.data));
+    axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/products`).then(res => setProducts(res.data));
   }, []);
 
   const addProduct = async () => {
     try {
-      await axios.post("http://localhost:5000/api/products", { title, price, description: "Sample", image: "https://via.placeholder.com/150", category: "Misc", stock: 10 }, { headers: { Authorization: `Bearer ${token}` }});
+      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/products`, { title, price, description: "Sample", image: "https://via.placeholder.com/150", category: "Misc", stock: 10 }, { headers: { Authorization: `Bearer ${token}` }});
       alert("Product added!");
       setTitle(""); setPrice("");
     } catch (err) { alert("Admin only!"); }

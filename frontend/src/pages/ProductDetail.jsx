@@ -20,7 +20,7 @@ export default function ProductDetail() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/products/${id}`)
+      .get(`${import.meta.env.VITE_API_BASE_URL}/api/products/${id}`)
       .then((res) => setProduct(res.data))
       .catch((err) => console.error(err));
   }, [id]);

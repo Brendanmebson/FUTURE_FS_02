@@ -32,7 +32,7 @@ export default function Checkout() {
     const token = localStorage.getItem("token");
     try {
       await axios.post(
-        "http://localhost:5000/api/orders",
+        `${import.meta.env.VITE_API_BASE_URL}/api/orders`,
         {
           products: state.cart.map((item) => ({
             product: item._id,
