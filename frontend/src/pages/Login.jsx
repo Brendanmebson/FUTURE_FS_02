@@ -6,7 +6,10 @@ import {
   Button,
   Typography,
   Paper,
+  IconButton,
+  InputAdornment,
 } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -16,6 +19,7 @@ import background from "../assets/background.jpg"; // adjust path if needed
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async () => {
@@ -50,12 +54,12 @@ export default function Login() {
     >
       <Container maxWidth="sm">
         <Paper
-          elevation={3}
+          elevation={6}
           sx={{
             p: 4,
-            borderRadius: 4,
+            borderRadius: 5,
             textAlign: "center",
-            background: "rgba(255,255,255,0.9)", // ✅ semi-transparent white
+             background: "rgba(255,255,255,0.9)", // ✅ semi-transparent white
             boxShadow: "0px 4px 12px rgba(0,0,0,0.3)",
           }}
         >
@@ -64,8 +68,9 @@ export default function Login() {
             gutterBottom
             fontWeight="bold"
             sx={{
-              color: "#333",
+              color: "#222",
               letterSpacing: 1,
+              textShadow: "0px 1px 2px rgba(0,0,0,0.1)",
             }}
           >
             Welcome Back
@@ -74,8 +79,9 @@ export default function Login() {
             variant="subtitle1"
             gutterBottom
             sx={{
-              color: "#666",
+              color: "#444",
               mb: 3,
+              textShadow: "0px 1px 1px rgba(255,255,255,0.5)",
             }}
           >
             Log in to access your account.
@@ -91,19 +97,35 @@ export default function Login() {
               sx={{
                 "& .MuiOutlinedInput-root": {
                   borderRadius: 3,
+                  background: "rgba(255,255,255,0.7)",
+                  backdropFilter: "blur(6px)",
                 },
               }}
             />
             <TextField
               label="Password"
-              type="password"
+              type={showPassword ? "text" : "password"}
               variant="outlined"
               fullWidth
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={() => setShowPassword((prev) => !prev)}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
               sx={{
                 "& .MuiOutlinedInput-root": {
                   borderRadius: 3,
+                  background: "rgba(255,255,255,0.7)",
+                  backdropFilter: "blur(6px)",
                 },
               }}
             />
@@ -116,10 +138,11 @@ export default function Login() {
                 py: 1.2,
                 textTransform: "none",
                 fontSize: "1rem",
-                background: "#333",
+                background: "linear-gradient(135deg, #222, #555)",
                 "&:hover": {
-                  background: "#555",
+                  background: "linear-gradient(135deg, #333, #666)",
                 },
+                boxShadow: "0px 4px 12px rgba(0,0,0,0.4)",
               }}
             >
               Log In
@@ -129,8 +152,11 @@ export default function Login() {
               sx={{
                 textTransform: "none",
                 borderRadius: 3,
-                color: "#333",
+                color: "#222",
                 fontWeight: "bold",
+                "&:hover": {
+                  textDecoration: "underline",
+                },
               }}
             >
               Don’t have an account? Sign Up

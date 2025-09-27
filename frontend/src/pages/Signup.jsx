@@ -6,7 +6,10 @@ import {
   Button,
   Typography,
   Paper,
+  IconButton,
+  InputAdornment,
 } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -17,6 +20,7 @@ export default function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // 👀 toggle state
   const navigate = useNavigate();
 
   const handleSignup = async () => {
@@ -43,7 +47,7 @@ export default function Signup() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        backgroundImage: `url(${background})`, // ✅ set background
+        backgroundImage: `url(${background})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -57,7 +61,7 @@ export default function Signup() {
             p: 4,
             borderRadius: 4,
             textAlign: "center",
-            background: "rgba(255,255,255,0.9)", // ✅ slight transparency
+            background: "rgba(255,255,255,0.9)",
             boxShadow: "0px 4px 12px rgba(0,0,0,0.3)",
           }}
         >
@@ -96,12 +100,24 @@ export default function Signup() {
             />
             <TextField
               label="Password"
-              type="password"
+              type={showPassword ? "text" : "password"}
               variant="outlined"
               fullWidth
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               sx={{ "& .MuiOutlinedInput-root": { borderRadius: 3 } }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={() => setShowPassword((prev) => !prev)}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
             />
             <Button
               variant="contained"

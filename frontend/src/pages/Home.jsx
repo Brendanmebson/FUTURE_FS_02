@@ -66,7 +66,7 @@ export default function Home() {
             textAlign: { xs: "center", md: "left" },
           }}
         >
-          New Tech Products
+          Trending Smart Products 
         </Typography>
 
         {/* ✅ Search + Filter Controls */}
